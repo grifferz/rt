@@ -130,6 +130,7 @@ sub Gateway {
         %$argsref
     );
 
+    RT->SetCurrentInterface('Email');
     RT->Config->RefreshConfigFromDatabase();
     RT->System->MaybeRebuildLifecycleCache();
 
