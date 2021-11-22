@@ -59,7 +59,7 @@ use Cwd ();
 use Scalar::Util qw(blessed);
 use UNIVERSAL::require;
 
-use vars qw($Config $System $SystemUser $Nobody $Handle $Logger $_Privileged $_Unprivileged $_INSTALL_MODE);
+use vars qw($Config $System $SystemUser $Nobody $Handle $Logger $CurrentInterface $_Privileged $_Unprivileged $_INSTALL_MODE);
 
 use vars qw($BasePath
  $EtcPath
@@ -666,6 +666,34 @@ sub UnprivilegedUsers {
     return $_Unprivileged;
 }
 
+
+=head2 CurrentInterface
+
+Returns current interface. Possible values are: API, CLI, Email, REST and Web.
+Note that CLI is set for scripts that use RT::Interface::CLI.
+
+=cut
+
+sub CurrentInterface { return $CurrentInterface || 'API' }
+
+=head2 SetCurrentInterface API|CLI|Email|REST|Web
+
+Sets current interface and returns it.
+
+=cut
+
+sub SetCurrentInterface {
+    shift if ( $_[0] // '' ) eq 'RT'; # shift package info
+    $CurrentInterface = shift;
+}
+
+=head2 ResetCurrentInterface
+
+Resets current interface(i.e. it will default to API)
+
+=cut
+
+sub ResetCurrentInterface { $CurrentInterface = undef }
 
 =head2 Plugins
 
