@@ -1,6 +1,6 @@
 # This Dockerfile is for testing only.
 
-FROM bpssysadmin/rt-base-debian-stretch
+FROM bpssysadmin/rt-base:5.0-buster
 
 ENV RT_TEST_PARALLEL 1
 ENV RT_TEST_DEVEL 1
